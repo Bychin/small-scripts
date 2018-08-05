@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+
+set timeout 20
+
+set ip [lindex $argv 0]
+set user [lindex $argv 1]
+set password [lindex $argv 2]
+
+spawn ssh "$user\@$ip"
+
+expect "$user\@$ip\'s password:"
+send "$password\r"
+expect "view @ RV6688BCM>"
+send "show dhcp lease\r"
+expect "view @ RV6688BCM>"
+send "quit\r"
